@@ -22,6 +22,7 @@ y = data[:, -1:]
 n_epochs = 4000
 batch_size = 256
 print_interval = 200
+# adam을 사용하면 필요 없다.
 learning_rate = 1e-2
 
 model = nn.Sequential(
@@ -35,7 +36,7 @@ model = nn.Sequential(
     nn.LeakyReLU(),
     nn.Linear(3, y.size(-1)),
 )
-
+# optimizer=optim.Adam(model.parameters())
 optimizer = optim.SGD(model.parameters(), lr=learning_rate)
 for i in range(n_epochs):
     # Shuffle the index to feed-forward.
@@ -45,8 +46,6 @@ for i in range(n_epochs):
 
     x_ = x_.split(batch_size, dim=0)
     y_ = y_.split(batch_size, dim=0)
-    # |x_[i]| = (batch_size, input_dim)
-    # |y_[i]| = (batch_size, output_dim)
 
     y_hat = []
     total_loss = 0
@@ -62,7 +61,6 @@ for i in range(n_epochs):
 
         optimizer.step()
 
-        # This is very important to prevent memory leak.
         total_loss += float(loss)
         y_hat += [y_hat_i]
 
