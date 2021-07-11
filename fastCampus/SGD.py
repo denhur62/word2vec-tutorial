@@ -76,3 +76,16 @@ df = pd.DataFrame(torch.cat([y, y_hat], dim=1).detach().numpy(),
 
 sns.pairplot(df, height=5)
 plt.show()
+
+
+# roauc 계산
+# df = pd.DataFrame(torch.cat([y[2], y_hat], dim=1).detach().numpy(),
+#                   columns=["y", "y_hat"])
+
+# sns.histplot(df, x='y_hat', hue='y', bins=50, stat='probability')
+# plt.show()
+
+
+# from sklearn.metrics import roc_auc_score
+
+# roc_auc_score(df.values[:, 0], df.values[:, 1])
