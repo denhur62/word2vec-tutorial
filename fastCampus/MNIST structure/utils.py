@@ -20,12 +20,12 @@ def load_mnist(is_train=True, flatten=True):
     return x, y
 
 
-def split_data(x, y, train_ratio=.8):
+def split_data(x, y, device, train_ratio=.8):
     train_cnt = int(x.size(0) * train_ratio)
     valid_cnt = x.size(0) - train_cnt
 
     # Shuffle dataset to split into train/valid set.
-    indices = torch.randperm(x.size(0))
+    indices = torch.randperm(x.size(0)).to(device)
     x = torch.index_select(
         x,
         dim=0,
