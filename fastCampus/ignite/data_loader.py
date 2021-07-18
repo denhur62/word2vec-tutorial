@@ -62,7 +62,7 @@ def get_loaders(config):
         dim=0,
         index=indices
     ).split([train_cnt, valid_cnt], dim=0)
-
+    # 무조건 shuffle 사용할 것
     train_loader = DataLoader(
         dataset=MnistDataset(train_x, train_y, flatten=True),
         batch_size=config.batch_size,
@@ -73,7 +73,7 @@ def get_loaders(config):
         batch_size=config.batch_size,
         shuffle=True,
     )
-
+    # shuffle 해도 되고 안해도 되고
     test_x, test_y = load_mnist(is_train=False, flatten=False)
     test_loader = DataLoader(
         dataset=MnistDataset(test_x, test_y, flatten=True),

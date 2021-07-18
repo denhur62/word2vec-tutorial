@@ -58,8 +58,9 @@ class MyEngine(Engine):
             accuracy = (torch.argmax(y_hat, dim=-1) == y).sum() / float(y.size(0))
         else:
             accuracy = 0
-
+        #높을수록 좋음
         p_norm = float(get_parameter_norm(engine.model.parameters()))
+        #수렴 하는게 좋음 
         g_norm = float(get_grad_norm(engine.model.parameters()))
 
         # Take a step of gradient descent.
